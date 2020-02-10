@@ -23,7 +23,6 @@ adj_list = {}
 for line in input_string_split:
 	# line is empty -> increment phase
 	if not line:
-		print(phase)
 		phase = phase + 1
 	# phase 0 -> add each line to list of colors
 	elif phase is 0:
@@ -37,6 +36,7 @@ for line in input_string_split:
 		adj_states = line.split()
 		adj_list[adj_states[0]].append(adj_states[1])
 		adj_list[adj_states[1]].append(adj_states[0])
+
 
 
 # TODO: Implement Backtracking Search
