@@ -32,7 +32,7 @@ class BacktrackingSearch:
 
         # if no colors remaining, return false
         if not available_colors:
-            print("Bracktracking...")
+            print("Backtracking...")
             return False
         # otherwise, 
         else:
