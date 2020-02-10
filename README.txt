@@ -1,3 +1,4 @@
+Placeholder for run instructions, Test
 Running the a1.py file (only tested on Linux)
 To run the assignment file, you will need to run the following commands. The assignment directory includes the input file, which the assignment file reads automatically. The input file must be named "input.txt".
 
