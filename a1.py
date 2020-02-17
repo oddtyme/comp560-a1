@@ -4,6 +4,9 @@
 # import backtracking search file
 import BacktrackingSearch
 
+# import local search file
+import LocalSearch
+
 # Open and read input file
 f = open("input.txt", "r")
 input_string = f.read()
@@ -45,3 +48,8 @@ for line in input_string_split:
 print("Running Backtracking Search...")
 BTS = BacktrackingSearch.BacktrackingSearch()
 BTS.main(adj_list, colors)
+
+
+print("Running Local Search...")
+LS = LocalSearch.LocalSearch()
+LS.main(adj_list, colors)
