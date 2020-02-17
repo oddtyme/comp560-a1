@@ -1,5 +1,5 @@
-# import randrange for random assignment
-from random import randrange
+# import random for arbitrary choices
+import random
 
 # Class that holds all functions relevant to local search
 class LocalSearch:
@@ -12,21 +12,46 @@ class LocalSearch:
 		for state in state_color_dict:
 			print("Randomly assigned " + state_color_dict[state] + " to " + state)
 		
-		# get initial cost
-		cost = self.cost(adj_list, state_color_dict)
-
 		# print initial cost for testing purposes
 		print("INITIAL COST: " + str(self.cost(adj_list, state_color_dict)))
 
-		while cost > 0:
+		print("Searching...")
+
+		while self.cost(adj_list, state_color_dict) > 0:
+			# create potential new solution
+			state_color_dict_prime = dict(state_color_dict)
+
+			# choose random state 
+			rand_state = random.choice(list(state_color_dict))
 			
+
+			# create copy of colors
+			available_colors = list(colors)
+			
+			# remove original color from list of colors 
+			available_colors.remove(state_color_dict[rand_state])
+
+			# randomly choose a color from that list and assign it to randomly selected state
+			rand_color = random.choice(available_colors)
+			state_color_dict_prime[rand_state] = rand_color
+
+			# compare solutions
+			if self.cost(adj_list, state_color_dict_prime) < self.cost(adj_list, state_color_dict):
+				print("Swtiched " + rand_state + " from " + state_color_dict[rand_state] + " to " + rand_color)
+				state_color_dict = state_color_dict_prime
+
+		print("----------------LOCAL SEARCH RESULTS-------------------")
+		for state in state_color_dict:
+			print("State: " + state + ", Color: " + state_color_dict[state])
+		
+	
 
 	# function that randomly assigns all states a color
 	def randomAssignment(self, state_list, colors):
 		state_color_dict = {}
 		
 		for state in state_list:
-			state_color_dict[state] = colors[randrange(4)]
+			state_color_dict[state] = colors[random.randrange(4)]
 
 		return state_color_dict
 
