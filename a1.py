@@ -49,6 +49,7 @@ print("Running Backtracking Search...")
 BTS = BacktrackingSearch.BacktrackingSearch()
 BTS.main(adj_list, colors)
 
+print("------------------------------------------------")
 
 print("Running Local Search...")
 LS = LocalSearch.LocalSearch()

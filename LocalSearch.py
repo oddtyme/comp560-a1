@@ -8,9 +8,18 @@ class LocalSearch:
 		print("Randomly assigning colors...")
 		state_color_dict = self.randomAssignment(adj_list.keys(), colors)		
 
+		# print random assignments for test purposes
 		for state in state_color_dict:
 			print("Randomly assigned " + state_color_dict[state] + " to " + state)
+		
+		# get initial cost
+		cost = self.cost(adj_list, state_color_dict)
 
+		# print initial cost for testing purposes
+		print("INITIAL COST: " + str(self.cost(adj_list, state_color_dict)))
+
+		while cost > 0:
+			
 
 	# function that randomly assigns all states a color
 	def randomAssignment(self, state_list, colors):
@@ -25,6 +34,7 @@ class LocalSearch:
 	# function that takes in current solution and evaluates cost
 	def cost(self, adj_list, state_color_dict):
 		# cost is intially 0
+		cost = 0
 
 		# check every edge for equal colors
 		for state in adj_list.keys():
