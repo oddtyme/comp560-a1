@@ -1,6 +1,11 @@
 # import random for arbitrary choices
 import random
 
+# import math for Simulated Annealing algorithm
+import math
+
+import time
+
 # Class that holds all functions relevant to local search
 class LocalSearch:
 	# main function where action takes place
@@ -37,8 +42,26 @@ class LocalSearch:
 
 			# compare solutions
 			if self.cost(adj_list, state_color_dict_prime) < self.cost(adj_list, state_color_dict):
+				print("Cooling...")
 				print("Swtiched " + rand_state + " from " + state_color_dict[rand_state] + " to " + rand_color)
 				state_color_dict = state_color_dict_prime
+			else:
+				# implement simulated annealing condition
+				# calculate difference in temp of trade
+				diff = self.cost(adj_list, state_color_dict_prime) - self.cost(adj_list, state_color_dict)
+
+				# delta d negated
+				negdiff = -1 * diff
+				
+				# exponential value calculated
+				exponent = float(negdiff) / float(self.cost(adj_list, state_color_dict))
+		
+				# SA condition for accepting bad trades
+				if math.exp(exponent) > random.uniform(0, 1):
+					print("Warming...")
+					print("Swtiched " + rand_state + " from " + state_color_dict[rand_state] + " to " + rand_color)
+					state_color_dict = state_color_dict_prime
+					
 
 		print("----------------LOCAL SEARCH RESULTS-------------------")
 		for state in state_color_dict:
