@@ -49,8 +49,6 @@ class LocalSearch:
 
 				# compare solutions
 				if self.cost(adj_list, state_color_dict_prime) < self.cost(adj_list, state_color_dict):
-					print("Accepted good result!")
-					print("Swtiched " + rand_state + " from " + state_color_dict[rand_state] + " to " + rand_color)
 					state_color_dict = state_color_dict_prime
 				else:
 					# implement simulated annealing condition
@@ -62,11 +60,9 @@ class LocalSearch:
 		
 					# SA condition for accepting bad trades
 					if math.exp(exponent) > random.uniform(0, 1):
-						print("Accepted bad result!")
-						print("Swtiched " + rand_state + " from " + state_color_dict[rand_state] + " to " + rand_color)
 						state_color_dict = state_color_dict_prime
 
-			print("Cooling...")
+			print("Cooling temp from " + str(temp) + " to " + str(temp * decrease))
 			temp = temp * decrease
 					
 		
