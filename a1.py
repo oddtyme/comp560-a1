@@ -4,6 +4,14 @@
 # import backtracking search file
 import BacktrackingSearch
 
+# import local search file
+import LocalSearch
+
+import time
+
+# import multiprocessing to time local search
+import multiprocessing
+
 # Open and read input file
 f = open("input.txt", "r")
 input_string = f.read()
@@ -45,3 +53,21 @@ for line in input_string_split:
 print("Running Backtracking Search...")
 BTS = BacktrackingSearch.BacktrackingSearch()
 BTS.main(adj_list, colors)
+
+print("------------------------------------------------")
+
+print("Running Local Search...")
+LS = LocalSearch.LocalSearch()
+
+# multiprocessing will terminate search after 60 seconds
+p = multiprocessing.Process(target=LS.main, args=(adj_list, colors, ))
+
+p.start()
+
+time.sleep(60)
+
+if p.is_alive():
+	print("Local search did not arrive at solution within time constraints")
+	p.terminate()
+
+
