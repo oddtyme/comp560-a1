@@ -4,12 +4,16 @@ class BacktrackingSearch:
     def main(self, adj_list, colors):
         # output dict linking each state with color
         state_color_dict = {}
-    
+        # dic for amount of remaining values
+        state_color_possibles = {} 
+
         # for each distinct root node, run backtrack search with utility function
         for state in adj_list:
             if state not in state_color_dict:
-                state_color_dict = self.bt_utility(adj_list, state, colors, state_color_dict)
-    
+                state_color_dict = self.bt_utility(adj_list, state, colors, state_color_dict, state_color_possibles)
+        
+        for state in adj_list.keys():
+            state_color_possibles[state]=4
 
         # output results
         print("-------------------------BACKTRACK RESULTS---------------------------")
@@ -18,7 +22,7 @@ class BacktrackingSearch:
 
 
     # utility function used to do the actual work of backtracking
-    def bt_utility(self, adj_list, state, colors, state_color_dict):
+    def bt_utility(self, adj_list, state, colors, state_color_dict, state_color_possibles):
         # determine available colors
 
         # start with all colors (create copy of all colors first)
@@ -45,7 +49,7 @@ class BacktrackingSearch:
                 # check if node is visited already
                 if adj_state not in state_color_dict:
                     # while search fails at next level, try different color here
-                    while not self.bt_utility(adj_list, adj_state, colors, state_color_dict):
+                    while not self.bt_utility(adj_list, adj_state, colors, state_color_dict, state_color_possibles):
                         # if no more colors available here, unvisit state and return false
                         pointer = pointer + 1
                         if pointer is len(available_colors):
